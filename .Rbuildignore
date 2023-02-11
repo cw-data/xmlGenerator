@@ -4,4 +4,5 @@
 ^\.Rproj\.user$
 main.R
 ^data-raw$
-data-raw/testdata.csv
+data-raw/testdata.xlsx
+data-raw/Forms_output_for_comparison.xlsx
