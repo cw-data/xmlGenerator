@@ -1,4 +1,9 @@
+
 load_example_data <- function() {
-  load("data/example_data.rda")
-    message("Example data loaded to global environment")
+    tryCatch(
+        expr = {
+            assign("example_data", example_data, envir = globalenv())
+            message("Example data loaded to global environment")
+        }
+    )
 }
