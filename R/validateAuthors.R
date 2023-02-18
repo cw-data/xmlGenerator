@@ -5,20 +5,22 @@
 
 
 
-validateAuthors <- function(forms_spreadsheet, ref_type_lookup){
+validateAuthors <- function(forms_spreadsheet, ref_type_lookup, lookup){
     tryCatch(
         expr = {
-            # here we 
-            library(dplyr)
-            library(data.table)
-            library(stringr)
+            # here we
+            # library(dplyr)
+            # library(data.table)
+            # library(stringr)
             # lookup <- data.table::fread("resources/colname_tagname_dictionary.csv") # old_spec
-            lookup <- data.table::fread("resources/colname_tagname_dictionary_20230130.csv") # new_spec
-            
+            # lookup <- data.table::fread("resources/colname_tagname_dictionary_20230130.csv") # new_spec
+            # lookup <- lookup # new_spec
+            lookup <- data.table::fread("data-raw/colname_tagname_dictionary_20230130.csv")
+
             record_list <- vector(mode = "list", length = length(unique(ref_type_lookup$`Reference type (from Form)`))) # create list
             names(record_list) <- unique(ref_type_lookup$`Reference type (from Form)`) # name list elements
             # sort references into `record_list` by ref-type
-            for(i in 1:length(record_list)){
+            for(i in seq_along(record_list)){
                 record_list[[i]]$data <- forms_spreadsheet %>%
                     subset(`Reference Type` == ref_type_lookup$`Reference type (from Form)`[i]) %>%
                     dplyr::select(6,ref_type_lookup$start_col_no[i]:ref_type_lookup$end_col_no[i],159)
@@ -26,18 +28,18 @@ validateAuthors <- function(forms_spreadsheet, ref_type_lookup){
                 # col 158 is $value (the Endnote key for reference type plain text)
             }
             # use lookup table from scripts/column_cleanup.R to rename columns in `record_list`
-            for(elm in 1:length(record_list)){ # loop through each element in `record_list`
+            for(elm in seq_along(record_list)){ # loop through each element in `record_list`
                 data.table::setnames(record_list[[elm]]$data, #  reset column names for each `record_list` element
-                                     old = lookup$xlsx_colname, # based on the key-value pairs established in `lookup`
-                                     new = lookup$xml_tag, skip_absent = TRUE) # based on key
+                                     lookup$xlsx_colname, # based on the key-value pairs established in `lookup`
+                                     lookup$xml_tag, skip_absent = TRUE) # based on key
             }
             # parse names
-            for(i in 1:length(record_list)){
+            for(i in seq_along(record_list)){
                 # authors
                 if("author" %in% colnames(record_list[[i]]$data)){ # if there's an $author column
                     try(
-                        record_list[[i]]$author_list <- 
-                            stringr::str_split(record_list[[i]]$data$author, "\r\n") # split the string at each newline character 
+                        record_list[[i]]$author_list <-
+                            stringr::str_split(record_list[[i]]$data$author, "\r\n") # split the string at each newline character
                     )
                 }
                 if("cartographer" %in% colnames(record_list[[i]]$data)){
@@ -77,11 +79,8 @@ validateAuthors <- function(forms_spreadsheet, ref_type_lookup){
                     )
                 }
             }
-            # return(record_list)
-            assign("record_list", record_list, envir = globalenv())
-        },
-        finally = {
-            message("`forms_spreadsheet` parsed to `record_list`...\nOutput available as `record_list` in global envrionment...\n")
+            return(record_list)
+            # assign("record_list", record_list, envir = globalenv())
         }
     )
 }
