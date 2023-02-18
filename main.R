@@ -1,27 +1,27 @@
-# a minimal workflow
-#----- external packages
+#----- required external packages
+library(stringr)
 library(xml2)
 library(dplyr)
 library(data.table)
-library(stringr)
 
 #----- my package
 library(xmlGenerator)
 
-#----- load package functions
-# source("R/loadData.R")
 
+#--------------------------------
+# A minimal reproducible workflow
+#--------------------------------
+
+# package includes example data so a user can see what the required data format is
 # xmlGenerator::load_example_data()
+
+# step 1: assign the filepath to your forms data as a character string in variable `forms_spreadsheet`
 forms_spreadsheet <- "data-raw/testdata.xlsx"
-# xmlGenerator::testfunction(forms_spreadsheet)
+# step 2: run loadData()
+# this function validates your input data for filetype, colnames, reference types
+# then it parses your data into a list (an instance of class record_list)
 xmlGenerator::loadData(forms_spreadsheet = forms_spreadsheet)
-
-
-
-
-
-
-
-
-# xmlGenerator::loadData(forms_spreadsheet)
-# xmlGenerator::buildXML(record_list, write = FALSE)
+# step 3: run buildXML()
+# this function builds xml out of your `record_list` object
+# "write = TRUE" will bring up a dialog for the user to choose where to save the xml output
+xmlGenerator::buildXML(record_list, write = FALSE)

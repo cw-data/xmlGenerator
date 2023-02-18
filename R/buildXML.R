@@ -12,22 +12,22 @@ buildXML <- function(record_list, write){
                 library(dplyr)
                 library(data.table)
                 library(xml2)
-                
+
                 #----- load project functions
-                source("R/ref_builders/book.R")
-                source("R/ref_builders/fs_pub.R")
-                source("R/ref_builders/gov_doc.R")
-                source("R/ref_builders/un_pub.R")
-                source("R/ref_builders/journal.R")
-                source("R/ref_builders/thesis.R")
-                source("R/ref_builders/map.R")
-                source("R/ref_builders/book_section.R")
-                source("R/ref_builders/conf_paper.R")
-                source("R/ref_builders/photo.R")
-                source("R/ref_builders/website.R")
-                source("R/ref_builders/newspaper.R")
-                source("R/ref_builders/conf_proceedings.R")
-                
+                # source("R/ref_builders/book.R")
+                # source("R/ref_builders/fs_pub.R")
+                # source("R/ref_builders/gov_doc.R")
+                # source("R/ref_builders/un_pub.R")
+                # source("R/ref_builders/journal.R")
+                # source("R/ref_builders/thesis.R")
+                # source("R/ref_builders/map.R")
+                # source("R/ref_builders/book_section.R")
+                # source("R/ref_builders/conf_paper.R")
+                # source("R/ref_builders/photo.R")
+                # source("R/ref_builders/website.R")
+                # source("R/ref_builders/newspaper.R")
+                # source("R/ref_builders/conf_proceedings.R")
+
                 #----- start an empty xml doc
                 if(nrow(forms_spreadsheet>0)){
                     #----- <xml>
@@ -39,7 +39,7 @@ buildXML <- function(record_list, write){
                     print("There are zero rows of data in `forms_spreadsheet`. Build cancelled.")
                     break
                 }
-                
+
                 #----- subset data by ref-type and call the appropriate getter function for each ref-type
                 for(i in 1:length(record_list)){
                     data <- record_list[[i]]$data
@@ -91,12 +91,12 @@ buildXML <- function(record_list, write){
                                                                         }
                     }
                 }
-                
+
                 #----- send output to console and save to global environment
                 assign("xml_output", real, envir = globalenv()) # save output to global environment so user can see it
                 cat(as.character(xml2::as_xml_document(real))) # print output to console for user
                 message("`forms_spreadsheet` parsed to XML...\nXML printed to console for review...\n")
-                
+
                 #----- write output to file if `write` flag is TRUE
                 if(write==TRUE){
                     real <- stringr::str_remove_all(xml_output, "(\n +|\n)") # remove newline characters because endnote doesn't like them

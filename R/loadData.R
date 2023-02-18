@@ -8,6 +8,11 @@
 loadData <- function(forms_spreadsheet){
     tryCatch(
         expr = {
+            #----- external packages
+            suppressMessages(suppressWarnings(library(xml2)))
+            suppressMessages(suppressWarnings(library(dplyr)))
+            suppressMessages(suppressWarnings(library(data.table)))
+            suppressMessages(suppressWarnings(library(stringr)))
             #----- load static asset
             # example_forms_spreadsheet <- example_data # read example (new_spec)
             load("data/example_data.rda")
