@@ -16,6 +16,7 @@ validateAuthors <- function(forms_spreadsheet, ref_type_lookup, lookup){
             # lookup <- data.table::fread("resources/colname_tagname_dictionary_20230130.csv") # new_spec
             # lookup <- lookup # new_spec
             lookup <- data.table::fread("data-raw/colname_tagname_dictionary_20230130.csv")
+            # lookup <- data(colname_tagname_dictionary_20230130)
 
             record_list <- vector(mode = "list", length = length(unique(ref_type_lookup$`Reference type (from Form)`))) # create list
             names(record_list) <- unique(ref_type_lookup$`Reference type (from Form)`) # name list elements
