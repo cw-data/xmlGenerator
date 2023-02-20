@@ -1,1 +1,56 @@
-"# xmlGenerator" 
+# Introduction
+
+`xmlGenerator` is an R package intended to transform one set of Microsoft Forms data into xml that is then imported into an EndNote library. `xmlGenerator` only works with one data structure that has a specific set of columns and column names and is not meant to be a a generic data frame to xml converter. If you need tools to create xml from data frames *in general*, `library(xml2)` is a good place to look.  
+
+# Getting started  
+
+`xmlGenerator` is available in [this GitHub repo](https://github.com/cw-data/xmlGenerator) and, as of 2023-02-20, is not published on CRAN.
+Use `devtools` to download `xmlGenerator`.
+
+```{r setup}
+devtools::install_github("https://github.com/cw-data/xmlGenerator")
+library(xmlGenerator)
+```
+
+# A minimal reproducible workflow  
+
+An example dataset is included with `xmlGenerator`. This example dataset allows a user to:  
+1) see the required format of their input data (`View(example_data)`)
+2) see the outputs of `xmlGenerator` functions ((`View(forms_spreadsheet)`, `View(record_list)`, `cat(as.character(xml_output))`)
+```{r}
+#--------------------------------
+# A minimal reproducible workflow that's included with library(xmlGenerator)
+# Purpose: include in the package everything a user needs to "see what's going on" without providing their own data
+#--------------------------------
+
+# step 1: load the provided example data and parse it to the objects required for `build_xml()`
+xmlGenerator::load_example_data()
+# step 2: run `build_xml()` on the object produced by step 1
+xmlGenerator::build_xml(record_list)
+```
+
+
+# An example of a "real" workflow
+
+The only difference between the "example" workflow above and a "real" workflow is the source of object `forms_spreadsheet`. In a real workflow, the user must specify their `spreadsheet_path` and provide `spreadsheet_path` as an argument to `load_data()`.  
+
+```{r}
+#--------------------------------
+# A "real" workflow
+# Purpose: mock up the exact workflow a user needs to follow to use library(xmlGenerator) to make xml
+#--------------------------------
+# step 1: assign the filepath to your forms data as a character string
+FORMS_SPREADSHEET <- "data-raw/testdata.xlsx"
+# step 2: run loadData()
+# this function validates your input data for filetype, colnames, reference types
+# then it parses your data into a list (an instance of class record_list)
+xmlGenerator::load_data(spreadsheet_path = FORMS_SPREADSHEET)
+# step 3: run buildXML()
+# this function builds xml out of your `record_list` object
+# "write = TRUE" will bring up a dialog for the user to choose where to save the xml output
+xmlGenerator::build_xml(record_list, write = FALSE)
+```
+
+# Example code
+
+[main.R](https://github.com/cw-data/xmlGenerator/blob/main/main.R) is provides valid syntax to use `xmlGenerator`.
