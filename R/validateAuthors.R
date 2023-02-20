@@ -12,11 +12,13 @@ validateAuthors <- function(forms_spreadsheet, ref_type_lookup, lookup){
             # library(dplyr)
             # library(data.table)
             # library(stringr)
-            # lookup <- data.table::fread("resources/colname_tagname_dictionary.csv") # old_spec
-            # lookup <- data.table::fread("resources/colname_tagname_dictionary_20230130.csv") # new_spec
-            # lookup <- lookup # new_spec
-            lookup <- data.table::fread("data-raw/colname_tagname_dictionary_20230130.csv")
-            # lookup <- data(colname_tagname_dictionary_20230130)
+            # colname_lookup <- data.table::fread("resources/colname_tagname_dictionary.csv") # old_spec
+            # colname_lookup <- data.table::fread("resources/colname_tagname_dictionary_20230130.csv") # new_spec
+            # colname_lookup <- data.table::fread("data-raw/colname_tagname_dictionary_20230130.csv")
+            # save(colname_lookup, file='data/colname_lookup.rda')
+            # rm(colname_lookup)
+            load(file="data/colname_lookup.rda")
+            # assign("example_data", example_data, envir = globalenv())
 
             record_list <- vector(mode = "list", length = length(unique(ref_type_lookup$`Reference type (from Form)`))) # create list
             names(record_list) <- unique(ref_type_lookup$`Reference type (from Form)`) # name list elements
@@ -28,11 +30,11 @@ validateAuthors <- function(forms_spreadsheet, ref_type_lookup, lookup){
                 # col 6 is $ref-type (the plain text reference type)
                 # col 158 is $value (the Endnote key for reference type plain text)
             }
-            # use lookup table from scripts/column_cleanup.R to rename columns in `record_list`
+            # use colname_lookup table from scripts/column_cleanup.R to rename columns in `record_list`
             for(elm in seq_along(record_list)){ # loop through each element in `record_list`
                 data.table::setnames(record_list[[elm]]$data, #  reset column names for each `record_list` element
-                                     lookup$xlsx_colname, # based on the key-value pairs established in `lookup`
-                                     lookup$xml_tag, skip_absent = TRUE) # based on key
+                                     colname_lookup$xlsx_colname, # based on the key-value pairs established in `colname_lookup`
+                                     colname_lookup$xml_tag, skip_absent = TRUE) # based on key
             }
             # parse names
             for(i in seq_along(record_list)){
