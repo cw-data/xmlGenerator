@@ -22,7 +22,8 @@ load_data <- function(spreadsheet_path){
             suppressMessages(suppressWarnings(library(stringr)))
             #----- load static asset
             # example_forms_spreadsheet <- example_data # read example (new_spec)
-            load("data/example_data.rda")
+            # load("data/example_data.rda")
+            example_data <- xmlGenerator::example_data
 
             #----- validate parts of `forms_spreadsheet`
             forms_spreadsheet <- validate_spreadsheet(spreadsheet_path)
