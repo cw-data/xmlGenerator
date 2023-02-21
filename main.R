@@ -6,6 +6,7 @@ library(data.table)
 library(readxl)
 
 #----- my package
+devtools::install_github("https://github.com/cw-data/xmlGenerator")
 library(xmlGenerator)
 
 
