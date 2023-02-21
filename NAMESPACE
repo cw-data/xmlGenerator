@@ -3,6 +3,7 @@
 export(build_xml)
 export(load_data)
 export(load_example_data)
+export(make_ref_type_lookup)
 import(data.table)
 import(dplyr)
 import(readxl)

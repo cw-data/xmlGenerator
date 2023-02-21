@@ -1,3 +1,17 @@
+#' Make a lookup table for reference types
+#'
+#' Make a reference type lookup table in \code{\link{xmlGenerator}}
+#'
+#' @param none
+#'
+#' @return \code{"example_data"}: a data frame containing reference type (e.g., book, newspaper) key-value pairs and column-index information
+#'
+#' @examples
+#' # note: xmlGenerator::make_ref_type_lookup() is a sub-function of `load_example_data()` and `load_data()` and isn't meant to be called on its own.
+#' xmlGenerator::make_ref_type_lookup()
+#'
+#' @export
+
 make_ref_type_lookup <- function() {
     #----- a module for loadData.R
     # colname_lookup <- data.table::fread("data-raw/colname_tagname_dictionary_20230130.csv")
