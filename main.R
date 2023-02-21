@@ -3,6 +3,7 @@ library(stringr)
 library(xml2)
 library(dplyr)
 library(data.table)
+library(readxl)
 
 #----- my package
 library(xmlGenerator)
