@@ -4,6 +4,7 @@ library(xml2)
 library(dplyr)
 library(data.table)
 library(readxl)
+library(devtools)
 
 #----- my package
 devtools::install_github("https://github.com/cw-data/xmlGenerator")
