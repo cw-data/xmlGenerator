@@ -8,6 +8,10 @@
 Use `devtools` to download `xmlGenerator`.
 
 ```{r setup}
+# install.packages("devtools")
+# or
+# renv::install("devtools")
+library(devtools)
 devtools::install_github("https://github.com/cw-data/xmlGenerator")
 library(xmlGenerator)
 ```
