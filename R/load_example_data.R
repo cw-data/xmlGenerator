@@ -19,10 +19,11 @@ load_example_data <- function() {
             message("Example data loaded to global environment and converted to `forms_spreadsheet`")
             assign("EXAMPLE_DATA", "my_directory/my_data.xlsx", envir = globalenv())
             assign("example_data", example_data, envir = globalenv())
+            forms_spreadsheet <- example_data
 
-            validate_ncol(example_data, example_data)
+            validate_ncol(forms_spreadsheet, example_data)
             validate_colnames(forms_spreadsheet, example_data)
-            ref_type_lookup <- xmlGenerator::make_ref_type_lookup()
+            ref_type_lookup <- make_ref_type_lookup()
             forms_spreadsheet <- validate_reftypes(forms_spreadsheet, ref_type_lookup)
             record_list <- validateAuthors(forms_spreadsheet, ref_type_lookup, example_data)
 

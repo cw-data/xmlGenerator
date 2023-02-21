@@ -1,6 +1,5 @@
-#----- a module for loadData.R
-
 make_ref_type_lookup <- function() {
+    #----- a module for loadData.R
     # colname_lookup <- data.table::fread("data-raw/colname_tagname_dictionary_20230130.csv")
     # ref_type_lookup <- readxl::read_excel("data-raw/endnote_ref-type_dictionary_20230130.xlsx") # a lookup table of reference types (new_spec)
     # save(ref_type_lookup, file='data/ref_type_lookup.rda')
