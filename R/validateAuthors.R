@@ -17,7 +17,8 @@ validateAuthors <- function(forms_spreadsheet, ref_type_lookup, lookup){
             # colname_lookup <- data.table::fread("data-raw/colname_tagname_dictionary_20230130.csv")
             # save(colname_lookup, file='data/colname_lookup.rda')
             # rm(colname_lookup)
-            load(file="data/colname_lookup.rda")
+            # load(file="data/colname_lookup.rda")
+            colname_lookup <- xmlGenerator::colname_lookup
             # assign("example_data", example_data, envir = globalenv())
 
             record_list <- vector(mode = "list", length = length(unique(ref_type_lookup$`Reference type (from Form)`))) # create list
