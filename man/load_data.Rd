@@ -10,9 +10,9 @@ load_data(spreadsheet_path)
 \item{spreadsheet_path}{a character string filepath pointing to the spreadsheet (xlsx, xls, csv) of MS Forms data.}
 }
 \value{
-\code{"forms_spreadsheet"}: a data frame containing user-provided MS Forms data plus one column that \code{"load_example_data()"} left-joined to \code{"example_data"}: \code{"forms_spreadsheet$value"} that contains key values for reference-type lookups called in \code{"build_xml"}.
+\code{forms_spreadsheet}: a data frame containing user-provided MS Forms data plus one column that \code{xmlGenerator::load_data()} left-joins to \code{forms_spreadsheet}: \code{forms_spreadsheet$value} that contains EndNote reference-type values for \code{xmlGenerator::build_xml()}.
 
-\code{"record_list"}: a list of \code{"forms_spreadsheet"} data parsed into fields for xml.
+\code{record_list}: a list of \code{forms_spreadsheet} data parsed into fields for xml.
 }
 \description{
 Load data in \code{\link{xmlGenerator}}

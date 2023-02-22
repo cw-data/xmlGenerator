@@ -34,11 +34,11 @@ An example dataset is included with `xmlGenerator`. This example dataset allows 
 # A minimal reproducible workflow that's included with library(xmlGenerator)
 # Purpose: include in the package everything a user needs to "see what's going on" without providing their own data
 #--------------------------------
-
-# step 1: load the provided example data and parse it to the objects required for `build_xml()`
-xmlGenerator::load_example_data()
-# step 2: run `build_xml()` on the object produced by step 1
-xmlGenerator::build_xml(record_list)
+# step 1: load and validate example data
+# this step assigns objects to the user's global environment for inspection.
+xmlGenerator::load_example_data() # ?load_example_data for more info
+# step 2: build xml from the example data
+xmlGenerator::build_xml(record_list) # ?build_xml for more info
 ```
 
 

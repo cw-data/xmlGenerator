@@ -4,17 +4,19 @@
 \alias{load_example_data}
 \title{Load example data}
 \usage{
-load_example_data()
+load_example_data(example_data = xmlGenerator::example_data)
 }
 \arguments{
 \item{none}{}
 }
 \value{
-\code{"example_data"}: a data frame containing the column structure that user-provided data must match. A user's MS Forms spreadsheet must have exactly the same column order and names as \code{"example_data"} to generate valid xml.
+\code{example_data}: a data frame containing the column structure that user-provided data must match. A user's MS Forms spreadsheet must have exactly the same column order and names as \code{example_data} to generate valid xml.
 
-\code{"forms_spreadsheet"}: a data frame containing user-provided MS Forms data plus one column that \code{"load_example_data()"} left-joined to \code{"example_data"}: \code{"forms_spreadsheet$value"} that contains key values for reference-type lookups called in \code{"build_xml"}.
+\code{forms_spreadsheet}: a data frame containing user-provided MS Forms data plus one column that \code{load_example_data()} left-joined to \code{example_data}: \code{forms_spreadsheet$value} that contains key values for reference-type lookups called in \code{xmlGenerator::build_xml()}.
 
-\code{"record_list"}: a list of \code{"forms_spreadsheet"} data parsed into fields for xml.
+\code{record_list}: a list of \code{forms_spreadsheet} data parsed into fields for xml.
+
+\code{EXAMPLE_DATA}: a character string filepath that points to the source (e.g., xlsx, xls, csv) of \code{forms_spreadsheet}.
 }
 \description{
 Load example data in \code{\link{xmlGenerator}}
