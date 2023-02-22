@@ -18,10 +18,8 @@ load_example_data <- function(example_data = xmlGenerator::example_data) {
     tryCatch(
         expr = {
             assign("EXAMPLE_DATA", "my_directory/my_data.xlsx", envir = globalenv()) # assign an example filepath
-            if(!("example_data" %in% ls(.GlobalEnv))) { # if the user hasn't already loaded `example_data` via `example_data <- xmlGenerator::example_data`
-                assign("example_data", example_data, envir = globalenv()) # assign example data
-                message("`example_data` loaded to global environment and converted to `forms_spreadsheet`") # print a success message
-            }
+            assign("example_data", example_data, envir = globalenv()) # assign example data
+            message("`example_data` loaded to global environment and converted to `forms_spreadsheet`") # print a success message
             forms_spreadsheet <- example_data # in the example scenario, `forms_spreadsheet` == `example_data`. IRL `forms_spreadsheet` != `example_data`
 
             validate_ncol(forms_spreadsheet, example_data) # validate number of columns
