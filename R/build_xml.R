@@ -102,7 +102,7 @@ build_xml <- function(record_list, write = FALSE){
 
                 #----- write output to file if `write` flag is TRUE
                 if(write==TRUE){
-                    real <- stringr::str_remove_all(xml_output, "(\n +|\n)") # remove newline characters because endnote doesn't like them
+                    real <- stringr::str_remove_all(as.character(xml_output), "(\n +|\n)") # remove newline characters because endnote doesn't like them
                     real <- as.character(real) # set real as character for output
                     # data.table::fwrite(real, "data/xmlouttest.xml")
                     write(real, file.choose())
